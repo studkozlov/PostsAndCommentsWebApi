@@ -130,7 +130,7 @@
       <Project>{CE117EBB-49A7-4AFD-8C34-3B23AE3D7D51}</Project>
       <Name>TestApp.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TetsApp.BLL\TestApp.BLL.csproj">
+    <ProjectReference Include="..\TestApp.BLL\TestApp.BLL.csproj">
       <Project>{57dc400c-e4ad-4a28-ad07-aeb5312b6276}</Project>
       <Name>TestApp.BLL</Name>
     </ProjectReference>

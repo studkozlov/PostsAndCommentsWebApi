@@ -71,13 +71,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestApp.BLL\TestApp.BLL.csproj">
+      <Project>{57dc400c-e4ad-4a28-ad07-aeb5312b6276}</Project>
+      <Name>TestApp.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestApp.DAL\TestApp.DAL.csproj">
       <Project>{3d1325fa-d8ae-4831-8d3e-37a5698d754d}</Project>
       <Name>TestApp.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TetsApp.BLL\TestApp.BLL.csproj">
-      <Project>{57dc400c-e4ad-4a28-ad07-aeb5312b6276}</Project>
-      <Name>TestApp.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
