@@ -5,7 +5,7 @@ namespace TestApp.BLL.Interfaces
 {
     public interface IDTOModelsValidator
     {
-        IDictionary<string, string> GetPostDTOValidationErrors(PostDTO post);
-        IDictionary<string, string> GetCommentDTOValidationErrors(CommentDTO comment);
+        IList<(string, string)> GetPostDTOValidationErrors(PostDTO post);
+        IList<(string, string)> GetCommentDTOValidationErrors(CommentDTO comment);
     }
 }

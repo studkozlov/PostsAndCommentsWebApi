@@ -30,9 +30,9 @@ namespace TestApp.BLL.Tests
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockValidator = new Mock<IDTOModelsValidator>();
             _mockValidator.Setup(m => m.GetCommentDTOValidationErrors(It.IsAny<CommentDTO>()))
-                .Returns(new Dictionary<string, string>(0));
+                .Returns(new List<(string, string)>(0));
             _mockValidator.Setup(m => m.GetPostDTOValidationErrors(It.IsAny<PostDTO>()))
-                .Returns(new Dictionary<string, string>(0));
+                .Returns(new List<(string, string)>(0));
             _mockUnitOfWork.Setup(m => m.Posts).Returns(_mockPosts.Object);
             _mockUnitOfWork.Setup(m => m.Comments).Returns(_mockComments.Object);
 

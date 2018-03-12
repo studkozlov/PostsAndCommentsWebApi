@@ -6,8 +6,8 @@ namespace TestApp.BLL.Infrastructure
 {
     public class ValidationException : Exception
     {
-        public IDictionary<string, string> ValidationErrors { get; protected set; }
-        public ValidationException(IDictionary<string, string> errors)
+        public IList<(string, string)> ValidationErrors { get; protected set; }
+        public ValidationException(IList<(string, string)> errors)
         {
             ValidationErrors = errors;
         }
@@ -15,7 +15,7 @@ namespace TestApp.BLL.Infrastructure
         {
             get
             {
-                var messages = ValidationErrors.Select(dp => $"Field: {dp.Key}  Error: {dp.Value}").ToList();
+                var messages = ValidationErrors.Select(dp => $"Field: {dp.Item1}  Error: {dp.Item2}").ToList();
                 return string.Join(";", messages);
             }
         }

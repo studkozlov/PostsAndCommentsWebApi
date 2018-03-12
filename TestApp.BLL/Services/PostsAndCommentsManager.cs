@@ -54,7 +54,7 @@ namespace TestApp.BLL.Services
             var validationErrors = _validator.GetCommentDTOValidationErrors(commentDTO);
             if (commentDTO != null && _db.Posts.Get(commentDTO.PostId) == null)
             {
-                validationErrors.Add("", "There isn't post with such PostId");
+                validationErrors.Add(("", "There isn't post with such PostId"));
             }
             if (validationErrors.Count > 0)
             {
@@ -195,7 +195,7 @@ namespace TestApp.BLL.Services
             var validationErrors = _validator.GetCommentDTOValidationErrors(commentDTO);
             if (commentDTO != null && _db.Posts.Get(commentDTO.PostId) == null)
             {
-                validationErrors.Add("", "There isn't post with such PostId");
+                validationErrors.Add(("", "There isn't post with such PostId"));
             }
             if (validationErrors.Count > 0)
             {
