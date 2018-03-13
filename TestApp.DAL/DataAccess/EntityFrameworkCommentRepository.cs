@@ -11,11 +11,11 @@ namespace TestApp.DAL.DataAccess
 {
     public class EntityFrameworkCommentRepository : IRepository<Comment>
     {
-        private TestAppEntityFrameworkContext _context;
+        private readonly TestAppEntityFrameworkContext _context;
 
         public EntityFrameworkCommentRepository(TestAppEntityFrameworkContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void Add(Comment comment)

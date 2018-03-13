@@ -2,7 +2,7 @@
 
 namespace TestApp.BLL.DTOModels
 {
-    public class CommentDTO
+    public class CommentDto
     {
         public int Id { get; set; }
         
@@ -14,9 +14,9 @@ namespace TestApp.BLL.DTOModels
 
         public int PostId { get; set; }
 
-        public CommentDTO()
+        public CommentDto()
         {
-            this.CreationDate = DateTime.Now;
+            CreationDate = DateTime.Now;
         }
     }
 }

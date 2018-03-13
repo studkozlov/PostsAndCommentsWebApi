@@ -15,7 +15,7 @@ namespace TestApp.DAL.Models
 
         public Post()
         {
-            this.CreationDate = DateTime.Now;
+            CreationDate = DateTime.Now;
         }
     }
 }

@@ -5,35 +5,34 @@ using TestApp.BLL.DTOModels;
 namespace TestApp.BLL.Tests
 {
     [TestClass]
-    public class DTOModelsValidatorUnitTest
+    public class DtoModelsValidatorUnitTest
     {
         [TestMethod]
-        public void PostDTOValidationTest()
+        public void PostDtoValidationTest()
         {
-            var validator = new DTOModelsValidator();
-            PostDTO nullPost = null;
-            var emptyFieldsPost = new PostDTO()
+            var validator = new DtoModelsValidator();
+            var emptyFieldsPost = new PostDto()
             {
                 Title = null,
                 Content = null
             };
-            var shortContentPost = new PostDTO()
+            var shortContentPost = new PostDto()
             {
                 Title = "Title",
                 Author = "Author",
                 Content = "123"
             };
-            var validPost = new PostDTO()
+            var validPost = new PostDto()
             {
                 Title = "Title",
                 Author = "Author",
                 Content = "1234567890"
             };
 
-            var nullPostErrors = validator.GetPostDTOValidationErrors(nullPost);
-            var emptyFieldsPostErrors = validator.GetPostDTOValidationErrors(emptyFieldsPost);
-            var shortContentPostErrors = validator.GetPostDTOValidationErrors(shortContentPost);
-            var validPostErrors = validator.GetPostDTOValidationErrors(validPost);
+            var nullPostErrors = validator.GetPostDtoValidationErrors(null);
+            var emptyFieldsPostErrors = validator.GetPostDtoValidationErrors(emptyFieldsPost);
+            var shortContentPostErrors = validator.GetPostDtoValidationErrors(shortContentPost);
+            var validPostErrors = validator.GetPostDtoValidationErrors(validPost);
 
             Assert.AreEqual(nullPostErrors.Count, 3);
             Assert.AreEqual(emptyFieldsPostErrors.Count, 2);
@@ -42,30 +41,29 @@ namespace TestApp.BLL.Tests
         }
 
         [TestMethod]
-        public void CommentDTOValidationTest()
+        public void CommentDtoValidationTest()
         {
-            var validator = new DTOModelsValidator();
-            CommentDTO nullComment = null;
-            var emptyFieldsComment = new CommentDTO()
+            var validator = new DtoModelsValidator();
+            var emptyFieldsComment = new CommentDto()
             {
                 User = null,
                 Text = null
             };
-            var shortUsernameComment = new CommentDTO()
+            var shortUsernameComment = new CommentDto()
             {
                 User = "FU",
                 Text = "Text"
             };
-            var validComment = new CommentDTO()
+            var validComment = new CommentDto()
             {
                 User = "User",
                 Text = "Text"
             };
 
-            var nullCommentErrors = validator.GetCommentDTOValidationErrors(nullComment);
-            var emptyFieldsCommentErrors = validator.GetCommentDTOValidationErrors(emptyFieldsComment);
-            var shortUsernameCommentErrors = validator.GetCommentDTOValidationErrors(shortUsernameComment);
-            var validCommentErrors = validator.GetCommentDTOValidationErrors(validComment);
+            var nullCommentErrors = validator.GetCommentDtoValidationErrors(null);
+            var emptyFieldsCommentErrors = validator.GetCommentDtoValidationErrors(emptyFieldsComment);
+            var shortUsernameCommentErrors = validator.GetCommentDtoValidationErrors(shortUsernameComment);
+            var validCommentErrors = validator.GetCommentDtoValidationErrors(validComment);
 
             Assert.AreEqual(nullCommentErrors.Count, 3);
             Assert.AreEqual(emptyFieldsCommentErrors.Count, 2);

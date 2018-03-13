@@ -7,15 +7,15 @@ namespace TestApp.BLL.Interfaces
 {
     public interface ITestAppService : IDisposable
     {
-        Task<IEnumerable<PostDTO>> GetAllPostsAsync();
-        Task<IEnumerable<CommentDTO>> GetCommentsOfPostAsync(int postId);
-        PostDTO GetPostById(int id);
-        void AddPost(PostDTO post);
-        Task UpdatePostAsync(PostDTO post);
+        Task<IEnumerable<PostDto>> GetAllPostsAsync();
+        Task<IEnumerable<CommentDto>> GetCommentsOfPostAsync(int postId);
+        PostDto GetPostById(int id);
+        void AddPost(PostDto postDto);
+        Task UpdatePostAsync(PostDto postDto);
         void DeletePostById(int id);
-        CommentDTO GetCommentById(int id);
-        void AddComment(CommentDTO comment);
-        Task UpdateCommentAsync(CommentDTO comment);
+        CommentDto GetCommentById(int id);
+        void AddComment(CommentDto commentDto);
+        Task UpdateCommentAsync(CommentDto commentDto);
         void DeleteCommentById(int id);
     }
 }

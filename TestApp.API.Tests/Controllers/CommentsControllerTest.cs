@@ -27,13 +27,13 @@ namespace TestApp.API.Tests.Controllers
         [TestMethod]
         public async Task GetCommentsOfPost()
         {
-            _mockManager.Setup(m => m.GetCommentsOfPostAsync(1)).Returns(Task.FromResult(new List<CommentDTO>()
+            _mockManager.Setup(m => m.GetCommentsOfPostAsync(1)).Returns(Task.FromResult(new List<CommentDto>()
             {
-                new CommentDTO()
+                new CommentDto()
             }.AsEnumerable()));
 
             var actionResult = await _controller.GetCommentsOfPost(1);
-            var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<CommentDTO>>;
+            var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<CommentDto>>;
 
             Assert.IsNotNull(contentResult);
             Assert.IsNotNull(contentResult.Content);
@@ -43,10 +43,10 @@ namespace TestApp.API.Tests.Controllers
         [TestMethod]
         public void GetCommentById()
         {
-            _mockManager.Setup(m => m.GetCommentById(1)).Returns(new CommentDTO() { Id = 1 });
+            _mockManager.Setup(m => m.GetCommentById(1)).Returns(new CommentDto() { Id = 1 });
 
             var actionResult = _controller.Get(1);
-            var contentResult = actionResult as OkNegotiatedContentResult<CommentDTO>;
+            var contentResult = actionResult as OkNegotiatedContentResult<CommentDto>;
 
             Assert.IsNotNull(contentResult);
             Assert.IsNotNull(contentResult.Content);
@@ -58,7 +58,6 @@ namespace TestApp.API.Tests.Controllers
         {
 
             var actionResult = _controller.Get(1);
-            var contentResult = actionResult as OkNegotiatedContentResult<CommentDTO>;
 
             Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
         }
@@ -66,19 +65,19 @@ namespace TestApp.API.Tests.Controllers
         [TestMethod]
         public void PostPost()
         {
-            var actionResult = _controller.Post(new CommentDTO() { Id = 1 });
+            var actionResult = _controller.Post(new CommentDto() { Id = 1 });
 
-            _mockManager.Verify(m => m.AddComment(It.IsAny<CommentDTO>()), Times.Once);
+            _mockManager.Verify(m => m.AddComment(It.IsAny<CommentDto>()), Times.Once);
             Assert.IsInstanceOfType(actionResult, typeof(OkResult));
         }
 
         [TestMethod]
         public async Task PutComment()
         {
-            var actionResult = await _controller.Put(2, new CommentDTO() { Id = 2 });
-            var contentResult = actionResult as NegotiatedContentResult<CommentDTO>;
+            var actionResult = await _controller.Put(2, new CommentDto() { Id = 2 });
+            var contentResult = actionResult as NegotiatedContentResult<CommentDto>;
 
-            _mockManager.Verify(m => m.UpdateCommentAsync(It.IsAny<CommentDTO>()), Times.Once);
+            _mockManager.Verify(m => m.UpdateCommentAsync(It.IsAny<CommentDto>()), Times.Once);
             Assert.IsNotNull(contentResult);
             Assert.AreEqual(HttpStatusCode.Accepted, contentResult.StatusCode);
             Assert.IsNotNull(contentResult.Content);

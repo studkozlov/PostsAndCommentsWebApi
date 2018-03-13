@@ -1,19 +1,19 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
-using TestApp.BLL.Interfaces;
 using TestApp.BLL.DTOModels;
 using TestApp.BLL.Infrastructure;
-using System.Threading.Tasks;
+using TestApp.BLL.Interfaces;
 
 namespace TestApp.API.Controllers
 {
     public class PostsController : ApiController
     {
-        private ITestAppService _appService;
+        private readonly ITestAppService _appService;
 
         public PostsController(ITestAppService service)
         {
-            this._appService = service;
+            _appService = service;
         }
         
         public async Task<IHttpActionResult> Get()
@@ -32,7 +32,7 @@ namespace TestApp.API.Controllers
             return Ok(post);
         }
         
-        public IHttpActionResult Post([FromBody]PostDTO post)
+        public IHttpActionResult Post([FromBody]PostDto post)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace TestApp.API.Controllers
             return Ok();
         }
         
-        public async Task<IHttpActionResult> Put(int id, [FromBody]PostDTO post)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]PostDto post)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace TestApp.API.Controllers
         {
             if (disposing)
             {
-                this._appService.Dispose();
+                _appService.Dispose();
             }
             base.Dispose(disposing);
         }

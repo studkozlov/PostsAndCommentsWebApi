@@ -1,46 +1,46 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Threading.Tasks;
+using TestApp.DAL.Infrastructure;
 using TestApp.DAL.Interfaces;
 using TestApp.DAL.Models;
-using TestApp.DAL.Infrastructure;
 
 namespace TestApp.DAL.DataAccess
 {
     public class EntityFrameworkUnitOfWork : IUnitOfWork
     {
-        private TestAppEntityFrameworkContext _context;
-        private IRepository<Post> _posts;
-        private IRepository<Comment> _comments;
-        private bool _disposed = false;
+        private readonly TestAppEntityFrameworkContext _context;
+        private readonly IRepository<Post> _posts;
+        private readonly IRepository<Comment> _comments;
+        private bool _disposed;
 
         public IRepository<Post> Posts
         {
             get
             {
-                return this._posts;
+                return _posts;
             }
         }
         public IRepository<Comment> Comments
         {
             get
             {
-                return this._comments;
+                return _comments;
             }
         }
         
         public EntityFrameworkUnitOfWork(string connectionName)
         {
-            this._context = new TestAppEntityFrameworkContext(connectionName);
-            this._posts = new EntityFrameworkPostRepository(this._context);
-            this._comments = new EntityFrameworkCommentRepository(this._context);
+            _context = new TestAppEntityFrameworkContext(connectionName);
+            _posts = new EntityFrameworkPostRepository(_context);
+            _comments = new EntityFrameworkCommentRepository(_context);
         }
         public EntityFrameworkUnitOfWork(TestAppEntityFrameworkContext context)
         {
-            this._context = context;
-            this._posts = new EntityFrameworkPostRepository(this._context);
-            this._comments = new EntityFrameworkCommentRepository(this._context);
+            _context = context;
+            _posts = new EntityFrameworkPostRepository(_context);
+            _comments = new EntityFrameworkCommentRepository(_context);
         }
         public void Save()
         {
@@ -88,13 +88,13 @@ namespace TestApp.DAL.DataAccess
         }
         protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    this._context.Dispose();
+                    _context.Dispose();
                 }
-                this._disposed = true;
+                _disposed = true;
             }
         }
     }

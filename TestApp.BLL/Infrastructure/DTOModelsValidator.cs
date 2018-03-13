@@ -4,9 +4,9 @@ using TestApp.BLL.Interfaces;
 
 namespace TestApp.BLL.Infrastructure
 {
-    public class DTOModelsValidator : IDTOModelsValidator
+    public class DtoModelsValidator : IDtoModelsValidator
     {
-        public IList<(string, string)> GetPostDTOValidationErrors(PostDTO post)
+        public IList<(string, string)> GetPostDtoValidationErrors(PostDto post)
         {
             var validationErrors = new List<(string, string)>();
             if (post == null)
@@ -27,7 +27,7 @@ namespace TestApp.BLL.Infrastructure
             }
             return validationErrors;
         }
-        public IList<(string, string)> GetCommentDTOValidationErrors(CommentDTO comment)
+        public IList<(string, string)> GetCommentDtoValidationErrors(CommentDto comment)
         {
             var validationErrors = new List<(string, string)>();
             if (comment == null)

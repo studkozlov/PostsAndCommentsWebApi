@@ -19,7 +19,7 @@ namespace TestApp.BLL.Tests
         private Mock<IRepository<Post>> _mockPosts;
         private Mock<IRepository<Comment>> _mockComments;
         private Mock<IUnitOfWork> _mockUnitOfWork;
-        private Mock<IDTOModelsValidator> _mockValidator;
+        private Mock<IDtoModelsValidator> _mockValidator;
         private ITestAppService _manager;
 
         [TestInitialize]
@@ -28,10 +28,10 @@ namespace TestApp.BLL.Tests
             _mockPosts = new Mock<IRepository<Post>>();
             _mockComments = new Mock<IRepository<Comment>>();
             _mockUnitOfWork = new Mock<IUnitOfWork>();
-            _mockValidator = new Mock<IDTOModelsValidator>();
-            _mockValidator.Setup(m => m.GetCommentDTOValidationErrors(It.IsAny<CommentDTO>()))
+            _mockValidator = new Mock<IDtoModelsValidator>();
+            _mockValidator.Setup(m => m.GetCommentDtoValidationErrors(It.IsAny<CommentDto>()))
                 .Returns(new List<(string, string)>(0));
-            _mockValidator.Setup(m => m.GetPostDTOValidationErrors(It.IsAny<PostDTO>()))
+            _mockValidator.Setup(m => m.GetPostDtoValidationErrors(It.IsAny<PostDto>()))
                 .Returns(new List<(string, string)>(0));
             _mockUnitOfWork.Setup(m => m.Posts).Returns(_mockPosts.Object);
             _mockUnitOfWork.Setup(m => m.Comments).Returns(_mockComments.Object);
@@ -42,7 +42,7 @@ namespace TestApp.BLL.Tests
         [TestMethod]
         public void AddCommentByService()
         {
-            var comment = new CommentDTO()
+            var comment = new CommentDto()
             {
                 User = "User",
                 Text = "Text",
@@ -53,7 +53,7 @@ namespace TestApp.BLL.Tests
 
             _manager.AddComment(comment);
 
-            _mockValidator.Verify(m => m.GetCommentDTOValidationErrors(comment));
+            _mockValidator.Verify(m => m.GetCommentDtoValidationErrors(comment));
             _mockComments.Verify(m => m.Add(It.IsAny<Comment>()), Times.Once);
             _mockUnitOfWork.Verify(m => m.Save(), Times.Once);
         }
@@ -61,7 +61,7 @@ namespace TestApp.BLL.Tests
         [TestMethod]
         public void AddPostByService()
         {
-            var post = new PostDTO()
+            var post = new PostDto()
             {
                 Title = "Title",
                 Author = "Author",
@@ -88,7 +88,7 @@ namespace TestApp.BLL.Tests
         {
             _manager.DeletePostById(1);
 
-            _mockPosts.Verify(m => m.Delete(It.Is<int>(ArgIterator => ArgIterator == 1)), Times.Once);
+            _mockPosts.Verify(m => m.Delete(It.Is<int>(arg => arg == 1)), Times.Once);
             _mockUnitOfWork.Verify(m => m.Save(), Times.Once);
         }
 
@@ -119,7 +119,7 @@ namespace TestApp.BLL.Tests
         [TestMethod]
         public async Task UpdateCommentAsyncByManager()
         {
-            var comment = new CommentDTO()
+            var comment = new CommentDto()
             {
                 User = "User",
                 Text = "Text",
@@ -130,7 +130,7 @@ namespace TestApp.BLL.Tests
 
             await _manager.UpdateCommentAsync(comment);
 
-            _mockValidator.Verify(m => m.GetCommentDTOValidationErrors(comment));
+            _mockValidator.Verify(m => m.GetCommentDtoValidationErrors(comment));
             _mockComments.Verify(m => m.Update(It.IsAny<Comment>()), Times.Once);
             _mockUnitOfWork.Verify(m => m.SaveAsync(), Times.Once);
         }
@@ -138,7 +138,7 @@ namespace TestApp.BLL.Tests
         [TestMethod]
         public async Task UpdatePostAsyncByManager()
         {
-            var post = new PostDTO()
+            var post = new PostDto()
             {
                 Title = "Title",
                 Author = "Author",
@@ -154,21 +154,6 @@ namespace TestApp.BLL.Tests
         [TestMethod]
         public async Task GetAllCommentsOfPost()
         {
-            var comments = new List<CommentDTO>()
-            {
-                new CommentDTO()
-                {
-                    PostId = 1
-                },
-                new CommentDTO()
-                {
-                    PostId = 2
-                },
-                new CommentDTO()
-                {
-                    PostId = 1
-                }
-            };
             _mockComments.Setup(m => m.FindAsync(It.IsAny<Expression<Func<Comment, bool>>>()))
                 .Returns((Expression<Func<Comment, bool>> predicate) => Task.FromResult(new List<Comment>()
                 {

@@ -3,9 +3,9 @@ using TestApp.BLL.DTOModels;
 
 namespace TestApp.BLL.Interfaces
 {
-    public interface IDTOModelsValidator
+    public interface IDtoModelsValidator
     {
-        IList<(string, string)> GetPostDTOValidationErrors(PostDTO post);
-        IList<(string, string)> GetCommentDTOValidationErrors(CommentDTO comment);
+        IList<(string, string)> GetPostDtoValidationErrors(PostDto post);
+        IList<(string, string)> GetCommentDtoValidationErrors(CommentDto comment);
     }
 }

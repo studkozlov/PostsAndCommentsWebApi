@@ -14,7 +14,7 @@ namespace TestApp.DAL.Models
 
         public Comment()
         {
-            this.CreationDate = DateTime.Now;
+            CreationDate = DateTime.Now;
         }
     }
 }

@@ -11,11 +11,11 @@ namespace TestApp.DAL.DataAccess
 {
     public class EntityFrameworkPostRepository : IRepository<Post>
     {
-        private TestAppEntityFrameworkContext _context;
+        private readonly TestAppEntityFrameworkContext _context;
 
         public EntityFrameworkPostRepository(TestAppEntityFrameworkContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void Add(Post post)
